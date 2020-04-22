@@ -2,7 +2,7 @@
   <div id="app">
     <h2>Global population: {{totalPopulation(countries)}}</h2>
 
-    <label for="country_select">Select a Country:</label>
+    <label for="country_select">Select a Country: </label>
     <select id="country_select" v-model="selectedCountry">
       <option disabled value="">Select a country</option>
       <option v-for="country in countries" :value="country">{{country.name}}</option>
