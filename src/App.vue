@@ -10,9 +10,18 @@
 
   <!-- Country detail goes here -->
     <section v-if="(selectedCountry != null)">
+      <img id="selected-img" v-bind:src="selectedCountry.flag" alt="Flag of country">
+
       <h4>{{selectedCountry.name}}</h4>
-      <img v-bind:src="selectedCountry.flag" alt="Flag of country">
-      <ul >
+      <ul>
+        <li>Native name: {{selectedCountry.nativeName}}</li>
+        <li><a v-bind:href="selectedCountryMap" target="_blank">Google Maps link lat long</a></li>
+        <li><a v-bind:href="selectedCountryMapName" target="_blank">Google Maps link by name</a></li>
+
+      </ul>
+
+      <h6>Neighbouring Countries</h6>
+      <ul>
         <li>Total population of neighbouring countries: {{totalPopulation(neighbourCountries)}} </li>
         <li v-for="country in neighbourCountries">{{country.name}}</li>
       </ul>
@@ -54,6 +63,12 @@ export default {
         }
       }
       return countryNeigh;
+    },
+    selectedCountryMap: function(){
+      return `https://maps.google.com/?ll=${this.selectedCountry.latlng[0]},${this.selectedCountry.latlng[1]}`
+    },
+    selectedCountryMapName: function(){
+      return `https://maps.google.com/?q=${this.selectedCountry.name}`
     }
   },
 
@@ -92,5 +107,10 @@ img {
 h4 {
   margin: -1px;
 }
-
+#selected-img {
+    width: 150px;
+    border-width: 1px;
+    border-style: solid;
+    margin-top: 10px;
+}
 </style>
